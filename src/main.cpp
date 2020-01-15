@@ -2,42 +2,69 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <algorithm>
+#include "main.h"
 using namespace std;
 
 
-void trim(string str) {
-	str.erase(remove(str.begin(), str.end(), ' '), str.end());
-}
-
-
-int check(string str) {
-	auto delimiter = "/";
-
-	trim(str);
-
-	try {
-		double left = stoi(str);
-	}
-	catch (out_of_range const& e)
-	{
-		cout << "overflow: number out of range (i.e. either too high or too low)" << endl;
-		return 1;
-	}
-	catch (...)
-	{
-		auto result = strtok(strcpy(&str[0], str.c_str()), delimiter);
-		while (result != NULL)
-		{
-			printf("%s\n", result);
-			result = strtok(NULL, "/");
+class Fraction {
+private:
+	int numerator;
+	int denominator;
+	// cals gcd
+	int gcd(int first, int second) {
+		if (second == 0) {
+			return first;
 		}
+		return (first, first % second);
 	}
-	return 0;
-}
+	//cals lcm
+	int lcm(int first, int second) {
+		return (first * second) / gcd(first, second);
+	}
+public:
+	Fraction(int top = 0, int bottom = 1) {
+		numerator = top;
+		denominator = bottom;
+	}
+	void print() {
+		cout << numerator << "/" << denominator << endl;
+	}
+
+	// operator overloading
+	Fraction operator + (Fraction const& rhs) {
+		/* if (typeid(rhs) == typeid(int)) {
+			Fraction new_rhs(rhs);
+			int lcd = lcm(rhs, this->denominator)
+		} */
+		int lcd = lcm(rhs.denominator, this->denominator);
+		apply_lcm(lcd, rhs, *this);
+
+		// new Fraction
+		Fraction final_frac;
+		final_frac.numerator = numerator + rhs.numerator;
+		final_frac.denominator = this->denominator;
+		return final_frac;
+	}
+	void apply_lcm(int lcd, Fraction rhs, Fraction lhs) {
+		rhs.numerator *= lcd / rhs.numerator;
+		rhs.denominator *= lcd / rhs.denominator;
+		lhs.numerator *= lcd / lhs.numerator;
+	}
+	~Fraction() {
+	
+	};
+};
 
 
 int main() {
+
+	Fraction fraction1(5, 2);
+	Fraction fraction2(4, 7);
+
+	// test print
+	(fraction1 + fraction2).print();
+
+	return 0;
 
 	string lhs, operator_str, rhs;
 	// asks user for fraction
@@ -50,28 +77,49 @@ int main() {
 	cin >> rhs;
 
 	// removes all whitespace
-	auto left = check(lhs);
-	trim(operator_str);
-	auto right = check(rhs);
-
-	if (left == 1 || right == 1) {
-		puts("The number provided is not valid");
-		return 1;
-	}
-
-
-	cout << lhs << operator_str << endl;
+	auto left = lhs;
+	auto right = rhs;
 
 	char operators[] = "+-*/";
 
 	// switch does not work, so if statements
 	
 
-	/* if (operator_str.compare(operators[0]) == 0) {
-		lhs = 0;
-
-	} */
-
 	return 0;
-
 }
+
+
+/* void trim(string str) {
+	// removies whitespace
+	str.erase(remove(str.begin(), str.end(), ' '), str.end());
+} */
+
+
+/*
+
+Fraction check(string str) {
+	auto delimiter = "/";
+
+	trim(str);
+
+	try {
+		double result = stoi(str);
+		return result;
+	}
+	catch (out_of_range const& e)
+	{
+		cout << "overflow: number out of range (i.e. either too high or too low)" << endl;
+		return 1;
+	}
+	catch (...)
+	{
+		auto result = strtok(strcpy(&str[0], str.c_str()), delimiter);
+		while (result != NULL)
+		{
+			fraction.push_back(stoi(result));
+			result = strtok(NULL, "/");
+		}
+		return fraction;
+	}
+}
+*/
