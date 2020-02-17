@@ -23,8 +23,12 @@ private:
 	}
 public:
 	Fraction(int top = 0, int bottom = 1) {
-		numerator = top;
-		denominator = bottom;
+		if (bottom == 0) {
+			cout << "You cannot have 0 as a denomator. Try Again." << endl;
+			exit(0);
+		}
+		this->numerator = top;
+		this->denominator = bottom;
 	}
 	void print() {
 		cout << numerator << "/" << denominator << endl;
@@ -36,8 +40,8 @@ public:
 			Fraction new_rhs(rhs);
 			int lcd = lcm(rhs, this->denominator)
 		} */
-		int lcd = lcm(rhs.denominator, this->denominator);
-		apply_lcm(lcd, rhs, *this);
+		int lcd = lcm(rhs.denominator, denominator);
+		apply_lcm(lcd, rhs, denominator);
 
 		// new Fraction
 		Fraction final_frac;
@@ -49,6 +53,7 @@ public:
 		rhs.numerator *= lcd / rhs.numerator;
 		rhs.denominator *= lcd / rhs.denominator;
 		lhs.numerator *= lcd / lhs.numerator;
+		lhs.denominator *= lcd / lhs.denominator;
 	}
 	~Fraction() {
 	
