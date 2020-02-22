@@ -1,11 +1,52 @@
 
-# Factions Calculator
+# Fractions C++ Library
 
 ## About
 
-This project is a fractions calculator. Enter the first number, operation and second number in each row and you will get a simplified fraction
+This project is a fractions library. Simply put:
 
-Also included is a main.h file that does nothing
+```c++
+#include "Fraction.h"
+```
+
+In the header, and the library is implemented
+
+The header lists all of the library's methods and functions
+
+Header: 
+
+```c
+class Fraction
+{
+private:
+  int _num;
+  int _den;
+  int gcd (int first, int second);
+  int lcm (int first, int second);
+  Fraction apply_lcm (int lcm, Fraction const & rhs, Fraction const & lhs);
+  std::vector <int> comparison_test (int lcm, Fraction const & rhs, Fraction const & lhs);
+public:
+  Fraction (int top = 0, int bottom = 1);
+  Fraction (int top = 0);
+  Fraction operator - ();
+  Fraction operator + (Fraction const & rhs);
+  Fraction operator - (Fraction & rhs);
+  Fraction operator * (Fraction const & rhs);
+  Fraction operator / (Fraction const & rhs);
+  bool operator == (Fraction const & rhs);
+  bool operator != (Fraction const & rhs);
+  bool operator < (Fraction const & rhs);
+  bool operator > (Fraction const & rhs);
+  bool operator <= (Fraction const & rhs);
+  bool operator >= (Fraction const & rhs);
+  ~ Fraction ();
+  float toDecimal () const;
+  void print ();
+  friend std::ostream & operator << (std::ostream & os, Fraction fraction);
+};
+```
+
+
 
 ## Project files
 

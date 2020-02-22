@@ -13,6 +13,7 @@ int main() {
 
 	return 0;
 
+	// impliementation of the calculator can be done later
 	string lhs, operator_str, rhs;
 	// asks user for fraction
 	cout << "This is a fractions calculator. Input the entire equation or one line at a time" << endl;
