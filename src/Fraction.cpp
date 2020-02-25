@@ -23,13 +23,26 @@ Fraction Fraction::apply_lcm (int lcm, Fraction const & rhs, Fraction const & lh
 		Fraction fraction(top1 + top2, bottom);
 		return fraction;
 	}
+Fraction Fraction::apply_lcm_minus (int lcm, Fraction const & rhs, Fraction const & lhs)
+                                                                              {
+		int top1 = rhs._num * (lcm / rhs._den);
+		int top2 = lhs._num * (lcm / lhs._den);
+		int bottom = rhs._den * (lcm / rhs._den);
+		Fraction fraction(top1 - top2, bottom);
+		return fraction;
+	}
 vector <int> Fraction::comparison_test (int lcm, Fraction const & rhs, Fraction const & lhs)
                                                                                         {
 		int top1 = rhs._num * (lcm / rhs._den);
 		int top2 = lhs._num * (lcm / lhs._den);
-		vector<int> comparsions = {top1, top2};
+		vector<int> comparsions {top2, top1};
 		return comparsions;
 	}
+Fraction::Fraction() {
+	this->_num = 0;
+	this->_den = 1;
+}
+
 Fraction::Fraction (int top, int bottom)
                                               {
 		if (bottom == 0) {
@@ -58,11 +71,10 @@ Fraction Fraction::operator + (Fraction const & rhs)
 		int lcm = this->lcm(rhs._den, this->_den);
 		return apply_lcm(lcm, rhs, (*this));
 	}
-Fraction Fraction::operator - (Fraction & rhs)
+Fraction Fraction::operator - (Fraction const& rhs)
                                             {
 		int lcm = this->lcm(rhs._den, this->_den);
-		rhs._num = - rhs._num;
-		return apply_lcm(lcm, rhs, (*this));
+		return apply_lcm_minus(lcm, rhs, (*this));
 	}
 Fraction Fraction::operator * (Fraction const & rhs)
                                                   {
@@ -78,78 +90,48 @@ bool Fraction::operator == (Fraction const & rhs)
                                                {
 		int lcm = this->lcm(rhs._den, this->_den);
 		vector<int> results = this->comparison_test(lcm, rhs, (*this));
-		for (int i = 0; i < results.size(); i++) {
-        	if (i == 0) {
-				int left = results[i];
-			} else {
-				int right = results[i];
-			}
-		}
+		int left = results[0];
+		int right = results[1];
 		return (left == right);
 	}
 bool Fraction::operator != (Fraction const & rhs)
                                                {
 		int lcm = this->lcm(rhs._den, this->_den);
 		vector<int> results = this->comparison_test(lcm, rhs, (*this));
-		for (int i = 0; i < results.size(); i++) {
-        	if (i == 0) {
-				int left = results[i];
-			} else {
-				int right = results[i];
-			}
-		}
+		int left = results[0];
+		int right = results[1];
 		return (left != right);
 	}
 bool Fraction::operator < (Fraction const & rhs)
                                               {
 		int lcm = this->lcm(rhs._den, this->_den);
 		vector<int> results = this->comparison_test(lcm, rhs, (*this));
-		for (int i = 0; i < results.size(); i++) {
-        	if (i == 0) {
-				int left = results[i];
-			} else {
-				int right = results[i];
-			}
-		}
+		int left = results[0];
+		int right = results[1];
 		return (left < right);
 	}
 bool Fraction::operator > (Fraction const & rhs)
                                               {
 		int lcm = this->lcm(rhs._den, this->_den);
 		vector<int> results = this->comparison_test(lcm, rhs, (*this));
-		for (int i = 0; i < results.size(); i++) {
-        	if (i == 0) {
-				int left = results[i];
-			} else {
-				int right = results[i];
-			}
-		}
+		int left = results[0];
+		int right = results[1];
 		return (left > right);
 	}
 bool Fraction::operator <= (Fraction const & rhs)
                                                {
 		int lcm = this->lcm(rhs._den, this->_den);
 		vector<int> results = this->comparison_test(lcm, rhs, (*this));
-		for (int i = 0; i < results.size(); i++) {
-        	if (i == 0) {
-				int left = results[i];
-			} else {
-				int right = results[i];
-			}
-		}
+		int left = results[0];
+		int right = results[1];
 		return (left <= right);
 	}
 bool Fraction::operator >= (Fraction const & rhs)
                                                {
 		int lcm = this->lcm(rhs._den, this->_den);
 		vector<int> results = this->comparison_test(lcm, rhs, (*this));
-		for (int i = 0; i < results.size(); i++) {
-        	if (i == 0) {
-				int left = results[i];
-			} else {
-				int right = results[i];
-			}
-		}
+		int left = results[0];
+		int right = results[1];
 		return (left >= right);
 	}
 Fraction::~ Fraction ()
@@ -167,7 +149,11 @@ void Fraction::print ()
 	}
 
 ostream& operator << (ostream& os, Fraction fraction) {
-	os << fraction._num << "/" << fraction._den;
+	if (fraction._den == 1) {
+		os << fraction._num;
+	} else {
+		os << fraction._num << "/" << fraction._den;
+	}
 	return os;
 }
 #undef LZZ_INLINE

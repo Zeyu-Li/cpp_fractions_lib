@@ -16,13 +16,15 @@ private:
   int gcd (int, int);
   int lcm (int, int);
   Fraction apply_lcm (int, Fraction const &, Fraction const &);
+  Fraction apply_lcm_minus (int, Fraction const &, Fraction const &);
   std::vector <int> comparison_test (int, Fraction const &, Fraction const &);
 public:
+  Fraction ();
   Fraction (int, int);
   Fraction (int);
   Fraction operator - ();
   Fraction operator + (Fraction const &);
-  Fraction operator - (Fraction &);
+  Fraction operator - (Fraction const &);
   Fraction operator * (Fraction const &);
   Fraction operator / (Fraction const & );
   bool operator == (Fraction const & );
@@ -34,7 +36,7 @@ public:
   ~ Fraction ();
   float toDecimal () const;
   void print ();
-  friend std::ostream & operator << (std::ostream & , Fraction );
+  friend std::ostream & operator << (std::ostream & , Fraction ) ;
 };
 std::ostream & operator << (std::ostream & , Fraction );
 #undef LZZ_INLINE

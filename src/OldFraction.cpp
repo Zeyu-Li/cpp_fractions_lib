@@ -4,6 +4,7 @@
 #include <string>
 using namespace std;
 
+// Note, not working
 
 class Fraction {
 	// fractions lib

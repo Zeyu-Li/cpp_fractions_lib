@@ -46,7 +46,7 @@ public:
 };
 ```
 
-
+Used [Lzz](https://www.lazycplusplus.com/)
 
 ## Project files
 
