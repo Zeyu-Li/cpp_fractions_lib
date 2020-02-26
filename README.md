@@ -7,7 +7,10 @@ This project is a fractions library. Simply put:
 
 ```c++
 #include "Fraction.h"
+#include "Fraction.cpp"
 ```
+
+if you drags the two items into your folder containing your project.
 
 In the header, and the library is implemented
 

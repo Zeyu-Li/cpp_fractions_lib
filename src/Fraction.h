@@ -1,4 +1,4 @@
-// Fraction.h
+// Fraction.h by Andrew Li
 
 #include <cstdio>
 #include <iostream>

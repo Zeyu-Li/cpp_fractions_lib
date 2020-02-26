@@ -1,5 +1,5 @@
-// Fraction.cpp
-//
+// Fraction.cpp by Andrew Li
+// used lzz to separate out header from main cpp file
 
 #include "Fraction.h"
 #define LZZ_INLINE inline
@@ -20,7 +20,7 @@ Fraction Fraction::apply_lcm (int lcm, Fraction const & rhs, Fraction const & lh
 		int top1 = rhs._num * (lcm / rhs._den);
 		int top2 = lhs._num * (lcm / lhs._den);
 		int bottom = rhs._den * (lcm / rhs._den);
-		Fraction fraction(top1 + top2, bottom);
+		Fraction fraction(top2 + top1, bottom);
 		return fraction;
 	}
 Fraction Fraction::apply_lcm_minus (int lcm, Fraction const & rhs, Fraction const & lhs)
