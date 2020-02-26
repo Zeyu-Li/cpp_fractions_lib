@@ -47,9 +47,12 @@ Fraction::Fraction (int top, int bottom)
                                               {
 		if (bottom == 0) {
 			throw "You cannot have 0 as a denomator. Try Again.";
+		} else if (bottom < 0) {
+			top = -top;
+			bottom = -bottom;
 		}
 		// gets gcd and simplifies if gcd not 1 or 0
-		const int gcd = this->gcd(top, bottom);
+		const int gcd = this->gcd(abs(top), abs(bottom));
 		if (gcd != 1 && gcd != 0) {
 			top /= gcd;
 			bottom /= gcd;
