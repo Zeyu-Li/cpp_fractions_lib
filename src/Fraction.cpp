@@ -28,7 +28,7 @@ Fraction Fraction::apply_lcm_minus (int lcm, Fraction const & rhs, Fraction cons
 		int top1 = rhs._num * (lcm / rhs._den);
 		int top2 = lhs._num * (lcm / lhs._den);
 		int bottom = rhs._den * (lcm / rhs._den);
-		Fraction fraction(top1 - top2, bottom);
+		Fraction fraction(top2 - top1, bottom);
 		return fraction;
 	}
 vector <int> Fraction::comparison_test (int lcm, Fraction const & rhs, Fraction const & lhs)
