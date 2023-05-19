@@ -10,7 +10,7 @@ This project is a fractions library. Simply put:
 #include "Fraction.cpp"
 ```
 
-if you drags the two items into your folder containing your project.
+if you drag the two items into your folder containing your project.
 
 In the header, and the library is implemented
 
